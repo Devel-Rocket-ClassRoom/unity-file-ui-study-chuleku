@@ -69,7 +69,7 @@ show_damage = true
                 string[] parts = line.Split('=');
                 if(parts.Length == 2)
                 {
-                    settings[parts[0].Trim()] = parts[1].Trim();
+                    settings[parts[0]] = parts[1];
                 }
             }
         }
