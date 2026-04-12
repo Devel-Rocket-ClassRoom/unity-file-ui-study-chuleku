@@ -31,27 +31,40 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     void Start()
     {
-        string path = Path.Combine(Application.persistentDataPath,"testFile");
+        string path = Path.Combine(Application.persistentDataPath, "testFile");
         if (!Directory.Exists(path)) Directory.CreateDirectory(path);
         string text = "Hello Unity World";
-        string file = Path.Combine(path, "encrypted.dat");
-        byte[] data = System.Text.Encoding.UTF8.GetBytes(text);
+        string secretFile = Path.Combine(path, "secret.txt");
+        string encryptedFile = Path.Combine(path, "encrypted.dat");
+        string decryptedFile = Path.Combine(path, "decrypted.txt");
         byte key = 0xAB;
-       /* File.WriteAllText(path, text);*/
+        File.WriteAllText(secretFile, text);
         Debug.Log($"원본: {text}");
 
-        for(int i = 0; i < data.Length; i++)
+        using (FileStream fsIn = new FileStream(secretFile, FileMode.Open))
+        using (FileStream fsOut = new FileStream(encryptedFile, FileMode.Create))
         {
-            data[i] = (byte)(data[i] ^ key);
+            int data;
+            while((data = fsIn.ReadByte()) != -1)
+            {
+                byte encryptedByte = (byte)(data ^ key);
+                fsOut.WriteByte(encryptedByte);
+            }
+            Debug.Log($"암호화 완료(파일 크기: {fsOut.Length} bytes)");
         }
-
-        using (FileStream fs = new FileStream(file, FileMode.Create))
+        using (FileStream fsIn = new FileStream(encryptedFile, FileMode.Open))
+        using (FileStream fsOut = new FileStream(decryptedFile, FileMode.Create))
         {
-            fs.ReadByte();
-            fs.Write(data, 0, data.Length);
-            Debug.Log($"암호화 완료:");
+            int data;
+            while ((data = fsIn.ReadByte()) != -1)
+            {
+                byte decryptedByte = (byte)(data ^ key);
+                fsOut.WriteByte(decryptedByte);
+            }
+            Debug.Log("복호화 완료");
         }
-        
-
+        string read = File.ReadAllText(decryptedFile);
+        Debug.Log($"복호화 결과: {read}");
+        Debug.Log($"원본과 일치: {text == read}");
     }
 }
