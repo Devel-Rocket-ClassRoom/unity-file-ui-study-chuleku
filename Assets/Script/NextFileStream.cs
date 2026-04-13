@@ -67,4 +67,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
         Debug.Log($"복호화 결과: {read}");
         Debug.Log($"원본과 일치: {text == read}");
     }
+    private void Update()
+    {
+    }
 }

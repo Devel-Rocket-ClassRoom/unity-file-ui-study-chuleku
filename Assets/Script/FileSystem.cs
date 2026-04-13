@@ -63,10 +63,10 @@ show_damage = true
         Dictionary<string, string> settings = new Dictionary<string, string>();
         using (StreamReader reader = new StreamReader(settingFile)) 
         {
-            string line;
-            while((line = reader.ReadLine())!=null)
+            string set;
+            while((set = reader.ReadLine())!=null)
             {
-                string[] parts = line.Split('=');
+                string[] parts = set.Split('=');
                 if(parts.Length == 2)
                 {
                     settings[parts[0]] = parts[1];
@@ -92,6 +92,7 @@ show_damage = true
         }
         Debug.Log("--- 최종 파일 내용---");
         Debug.Log(File.ReadAllText(settingFile));
+
     }
 
 }
