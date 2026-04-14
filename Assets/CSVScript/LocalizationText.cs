@@ -26,8 +26,7 @@ public class LocalizationText : MonoBehaviour
 
 
     private void OnEnable()
-    {
-
+    { 
             Variables.OnLanguageChanged += OnChangeLanguage;
             OnChangeLanguage();
        
@@ -74,19 +73,16 @@ public class LocalizationText : MonoBehaviour
     [ContextMenu("ChangeLanguage")]
     private void ChangeLanguage()
     {
-
-        Variables.Language = Language.Korean;
         LocalizationText[] allTexts = GameObject.FindObjectsOfType<LocalizationText>();
         cache.Clear();
         foreach (LocalizationText text in allTexts)
         {
             cache[text] = (text.language, text.Id);
-
+            text.language = Language.Korean;
             text.Id = id.Hello;
-            text.OnChangeLanguage(Variables.Language);
+            text.OnChangeLanguage(text.language);
         }
         changechack = false;
-
     }
     
 #endif
@@ -96,6 +92,7 @@ public class LocalizationText : MonoBehaviour
         text.text = stringTable.Get(idkey);
         
     }
+#if UNITY_EDITOR
     [ContextMenu("Refresh")]
     private void Refresh()
     {
@@ -107,7 +104,7 @@ public class LocalizationText : MonoBehaviour
         }
         changechack = true;
     }
-
+#endif
 
     /// 기존에 했던 방식
     /*    [ExecuteInEditMode]
