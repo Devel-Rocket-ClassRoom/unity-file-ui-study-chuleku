@@ -1,0 +1,5 @@
+﻿Id,Name,Desc,Health,AttackDamage,Defense,Icon
+Character1,Hero,Desc1,Heal1,Attack1,Def1,Icon_Helmet02
+Character2,Skull1,Desc2,Heal2,Attack2,Def2,Icon_Skull01
+Character3,Skull2,Desc3,Heal3,Attack3,Def3,Icon_Skull02
+Character4,Skull3,Desc4,Heal4,Attack4,Def4,Icon_Skull03

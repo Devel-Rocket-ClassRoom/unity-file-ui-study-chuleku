@@ -1,4 +1,12 @@
-Id,String
-Hello,こんにちは
-Bye,さよなら
-You Die,あなたは死ぬ
+﻿Id,String
+HELLO,やあ
+BYE,じゃあな
+YOU DIE,あなたは死ぬ
+Item1Name,?
+Item2Name,盾
+Item3Name,弓
+Item4Name,ポ?ション
+Item1Desc,これは?だ。
+Item2Desc,これは盾だ。
+Item3Desc,これは弓だ。
+Item4Desc,これはポ?ションだ。

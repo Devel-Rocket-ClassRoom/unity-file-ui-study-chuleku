@@ -1,4 +1,32 @@
-﻿"Id",String
-"Hello",하이
-"Bye",잘가
-"You Die",잘 죽어
+﻿Id,String
+HELLO,안녕
+BYE,잘가
+YOU DIE,너 죽음
+Item1Name,검
+Item2Name,방패
+Item3Name,활 
+Item4Name,물약 
+Item1Desc,이것은 검이다.
+Item2Desc,이것은 방패다.
+Item3Desc,이것은 활이다.
+Item4Desc,이것은 물약이다.
+Hero,용사
+Skull1,쫄병해골
+Skull2,해골병사
+Skull3,사령왕
+Desc1,마왕을 무찌를 용사
+Desc2,정찰병 해골
+Desc3,정예 해골
+Desc4,해골중 강력함
+Heal1,200
+Heal2,50
+Heal3,150
+Heal4,300
+Attack1,20
+Attack2,5
+Attack3,15
+Attack4,30
+Def1,10
+Def2,3
+Def3,5
+Def4,10

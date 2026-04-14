@@ -1,69 +1,45 @@
-using CsvHelper.Configuration.Attributes;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using System.IO;
+using System.Text;
 
-public enum id
-{
-    Hello,
-    Bye,
-    [CsvHelper.Configuration.Attributes.Name("You Die")]
-    You_Die
-};
 public class StringTable : DataTable
 {
+    public static readonly string UnKnown = "키 없음";
+
     public class Data
     {
-        public static System.Action OnIdChangedEvent;
-        [Name("Id")]
-        public id Id { get; set; }
-        [Ignore]
-        public string Name
-        {
-            get
-            {
-                OnIdChangedEvent?.Invoke();
-                if (Id == id.You_Die)return "You Die";
-                return Id.ToString();
-            }
-        }
+        public string Id { get; set; }
         public string String { get; set; }
     }
-    private readonly Dictionary<id, string> table = new Dictionary<id, string>();
+
+    private readonly Dictionary<string, string> table = new Dictionary<string, string>();
     public override void Load(string filename)
     {
         table.Clear();
 
-        string path = string.Format(FormatPath, filename);
+        var path = string.Format(FormatPath, filename);
         TextAsset textAsset = Resources.Load<TextAsset>(path);
         var list = LoadCsv<Data>(textAsset.text);
-        foreach (Data data in list)
+        foreach (var data in list)
         {
-            if(!table.ContainsKey(data.Id))
+            if (!table.ContainsKey(data.Id))
             {
                 table.Add(data.Id, data.String);
             }
             else
             {
-                Debug.LogError($"키 중복 : {data.Id}");
+                Debug.LogWarning($"키 중복'{data.Id} - {filename}'");
             }
         }
-
     }
-    public static readonly string Unknown = "키 없음";
+
     public string Get(string key)
     {
-        string fixkey = key.Replace(" ", "_");
-        System.Enum.TryParse(fixkey, out id idKey);
+        if (!table.ContainsKey(key))
         {
-            if (!table.ContainsKey(idKey))
-            {
-                return Unknown;
-            }
-            else
-            {
-                return table[idKey];
-            }
+            return UnKnown;
         }
+        return table[key];
     }
 }

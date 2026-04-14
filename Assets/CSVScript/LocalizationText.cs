@@ -13,28 +13,17 @@ public class LocalizationText : MonoBehaviour
 {
     [ExecuteInEditMode]
 #if UNITY_EDITOR
-    public Language language;
-    public id Id;
+    public Language editlanguage;
 #endif
-    private bool changechack;
-    public string idkey
-    {
-        get { return Id.ToString().Replace("_", " "); }
-    }
+    public string id;
     public TextMeshProUGUI text;
 
 
 
     private void OnEnable()
-    { 
-            Variables.OnLanguageChanged += OnChangeLanguage;
-            OnChangeLanguage();
-       
-#if UNITY_EDITOR
-
-            OnChangeLanguage(language);
-
-#endif
+    {
+        Variables.OnLanguageChanged += OnChangeLanguage;
+        OnChangeLanguage(editlanguage);  
     }
     private void OnDisable()
     {
@@ -45,64 +34,38 @@ public class LocalizationText : MonoBehaviour
     private void OnValidate()
     {
 #if UNITY_EDITOR
-        OnChangeLanguage(language);
+        OnChangeLanguage(editlanguage);
 #else
         OnChangeLanguage();
 #endif
         
     }
 
-    private void OnChangeLanguage()
+    public void OnChangeId()
     {
-        text.text = DataTableManager.StringTable.Get(idkey);
+        text.text = DataTableManager.StringTable.Get(id);
     }
-#if UNITY_EDITOR
-    private void OnChangeLanguage(Language language)
+
+    public void OnChangeLanguage()
+    {
+        text.text = DataTableManager.StringTable.Get(id);
+    }
+
+    public void OnChangeLanguage(Language language)
     {
         var stringTable = DataTableManager.GetStringTable(language);
-        text.text = stringTable.Get(idkey);
-        if(changechack)
-        {
-           NewId();
-        }
+        text.text = stringTable.Get(id);
     }
-#endif
 #if UNITY_EDITOR
-    private Dictionary<LocalizationText, (Language lang, id id)> cache
-    = new Dictionary<LocalizationText, (Language, id)>();
     [ContextMenu("ChangeLanguage")]
     private void ChangeLanguage()
     {
         LocalizationText[] allTexts = GameObject.FindObjectsOfType<LocalizationText>();
-        cache.Clear();
         foreach (LocalizationText text in allTexts)
         {
-            cache[text] = (text.language, text.Id);
-            text.language = Language.Korean;
-            text.Id = id.Hello;
-            text.OnChangeLanguage(text.language);
+            text.editlanguage = Language.Korean;
+            text.OnChangeLanguage(text.editlanguage);
         }
-        changechack = false;
-    }
-    
-#endif
-    private void NewId()
-    {
-        var stringTable = DataTableManager.GetStringTable(language);
-        text.text = stringTable.Get(idkey);
-        
-    }
-#if UNITY_EDITOR
-    [ContextMenu("Refresh")]
-    private void Refresh()
-    {
-        foreach (var item in cache)
-        {
-            item.Key.language = item.Value.lang;
-            item.Key.Id = item.Value.id;
-            item.Key.OnChangeLanguage(item.Value.lang);
-        }
-        changechack = true;
     }
 #endif
 
