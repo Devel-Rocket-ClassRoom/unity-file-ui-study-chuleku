@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,6 @@ public class CheckCharacher : MonoBehaviour
     public LocalizationText localizationTextHealth;
     public LocalizationText localizationTextAttack;
     public LocalizationText localizationTextDefense;
-
     public Image icon;
 
 
@@ -47,7 +47,7 @@ public class CheckCharacher : MonoBehaviour
         localizationTextDefense.id = character.Defense;
         localizationTextName.OnChangeId();
         localizationTextDesc.OnChangeId();
-        localizationTextHealth.OnChangeId();
+        localizationTextHealth.OnChangeId();   
         localizationTextAttack.OnChangeId();
         localizationTextDefense.OnChangeId();
     }
