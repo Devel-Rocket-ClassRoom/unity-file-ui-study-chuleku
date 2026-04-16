@@ -1,0 +1,15 @@
+{
+  "$type": "SaveDataV3, Assembly-CSharp",
+  "itemids": {
+    "$type": "System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib",
+    "$values": [
+      "Item1",
+      "Item2",
+      "Item3",
+      "Item4"
+    ]
+  },
+  "Gold": 4351,
+  "Name": "Test1234",
+  "Version": 3
+}

@@ -17,6 +17,7 @@ public class LocalizationText : MonoBehaviour
 #endif
     public string id;
     public TextMeshProUGUI text;
+    public string masage;
 
 
 
@@ -55,6 +56,10 @@ public class LocalizationText : MonoBehaviour
     {
         var stringTable = DataTableManager.GetStringTable(language);
         text.text = stringTable.Get(id);
+    }
+    public void OnChangeStringId()
+    {
+        masage = DataTableManager.StringTable.Get(id).ToString();
     }
 #if UNITY_EDITOR
     [ContextMenu("ChangeLanguage")]
