@@ -48,6 +48,7 @@ public class difficultyWIndow : GenericWindow
             toggles[selected].isOn = true;
             currentDiff = obj.diffVersion;
             currentDiffName = obj.diffName;
+            Debug.Log($"불러오기 완료 현재 난이도: {currentDiffName}");
         }
     }
     public override void Close()
@@ -98,6 +99,7 @@ public class difficultyWIndow : GenericWindow
         }
         string json = JsonConvert.SerializeObject(difsave);
         File.WriteAllText(Filepath, json);
+        Debug.Log($"저장 완료 저장 난이도 : {currentDiffName}");
         windowManager.Open(0);
     }
 }

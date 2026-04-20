@@ -87,6 +87,6 @@ public class NewKeyboardWindow : GenericWindow
     }
     public void Accept()
     {
-
+        windowManager.Open(0);
     }
 }
