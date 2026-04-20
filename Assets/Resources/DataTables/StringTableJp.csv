@@ -1,4 +1,4 @@
-﻿Id,String
+Id,String
 HELLO,やあ
 BYE,じゃあな
 YOU DIE,あなたは死ぬ
@@ -10,3 +10,11 @@ Item1Desc,これは?だ。
 Item2Desc,これは盾だ。
 Item3Desc,これは弓だ。
 Item4Desc,これはポ?ションだ。
+Name,名前
+Desc,説明
+Type,タイプ
+Value,値
+Cost,コスト
+Weapon,武器
+Equip,装備
+Consumable,消費品

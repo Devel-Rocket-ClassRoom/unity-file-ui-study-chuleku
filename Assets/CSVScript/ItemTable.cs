@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 /*Id, Type, Name, Desc, Value, Cost, Icon
@@ -20,8 +22,8 @@ public class ItemData
     public string Icon { get; set; }
 
 
-    public string StringName => DataTableManager.StringTable.Get("Name");
-    public string StringDesc => DataTableManager.StringTable.Get("Desc");
+    public string StringName => DataTableManager.StringTable.Get(Name);
+    public string StringDesc => DataTableManager.StringTable.Get(Desc);
     public Sprite IconSprite => Resources.Load<Sprite>($"Icon/{Icon}");
     public override string ToString()
     {
@@ -34,6 +36,7 @@ public class ItemData
 
 public class ItemTable : DataTable
 {
+    private List<string> keyList;
 
     private readonly Dictionary<string, ItemData> table = new Dictionary<string, ItemData>();
     public override void Load(string filename)
@@ -54,6 +57,7 @@ public class ItemTable : DataTable
                 Debug.LogError($"아이템 아이디 중복");
             }
         }
+        keyList = table.Keys.ToList();
     }
 
     public ItemData Get(string id)
@@ -67,5 +71,9 @@ public class ItemTable : DataTable
         {
             return table[id];
         }
+    }
+    public ItemData GetRandom()
+    {
+        return Get(keyList[Random.Range(0, keyList.Count)]);
     }
 }

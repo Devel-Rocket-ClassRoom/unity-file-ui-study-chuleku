@@ -1,19 +1,20 @@
+using Unity.VisualScripting;
 using UnityEngine;
-using SaveDataVC = SaveDataV3;
+using SaveDataVC = SaveDataV4;
 
 public class SaveLoadTest1 : MonoBehaviour
 {
+    
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
             SaveLoadManager.Data = new SaveDataVC();
+            SaveItemData sd = new SaveItemData();
+            sd.itemData = DataTableManager.ItemTable.Get("Item1");
             SaveLoadManager.Data.Name = "Test1234";
             SaveLoadManager.Data.Gold = 4351;
-            SaveLoadManager.Data.itemids.Add("Item1");
-            SaveLoadManager.Data.itemids.Add("Item2");
-            SaveLoadManager.Data.itemids.Add("Item3");
-            SaveLoadManager.Data.itemids.Add("Item4");
+            SaveLoadManager.Data.itemids.Add(sd);
             SaveLoadManager.Save();
         }
         if(Input.GetKeyDown(KeyCode.Alpha2))
@@ -24,7 +25,9 @@ public class SaveLoadTest1 : MonoBehaviour
                 Debug.Log(SaveLoadManager.Data.Gold);
                 foreach(var itemid in SaveLoadManager.Data.itemids)
                 {
-                    Debug.Log(DataTableManager.ItemTable.Get(itemid));
+                    Debug.Log(itemid.instanceId);
+                    Debug.Log(itemid.itemData.Name);
+                    Debug.Log(itemid.itemData.Id);
                 }
             }
             else

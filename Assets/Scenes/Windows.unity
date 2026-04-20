@@ -3364,7 +3364,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6354631953957978869, guid: b9b58367a0eb3ba43ab7d860dc0a8c58, type: 3}
       propertyPath: m_PreferredWidth
-      value: 60
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7922402244736154784, guid: b9b58367a0eb3ba43ab7d860dc0a8c58, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -11778,8 +11778,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.HorizontalLayoutGroup
   m_Padding:
-    m_Left: 20
-    m_Right: 20
+    m_Left: 10
+    m_Right: 10
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
@@ -12554,7 +12554,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 191.72932, y: -90}
+  m_AnchoredPosition: {x: 173.69159, y: -90}
   m_SizeDelta: {x: 210, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1911960977
@@ -12737,7 +12737,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6354631953957978869, guid: b9b58367a0eb3ba43ab7d860dc0a8c58, type: 3}
       propertyPath: m_PreferredWidth
-      value: 60
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7922402244736154784, guid: b9b58367a0eb3ba43ab7d860dc0a8c58, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size

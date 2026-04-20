@@ -1,0 +1,22 @@
+using UnityEngine;
+using UnityEngine.UI;
+
+public class UiInvenSlotList : MonoBehaviour
+{
+    public UiInvenSlot prefab;
+    public ScrollRect scrollRect;
+
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                var saveItemData = SaveItemData.GetRandomItem();
+                var newInven = Instantiate(prefab, scrollRect.content);
+                newInven.SetItem(saveItemData);
+            }
+        }
+    }
+}

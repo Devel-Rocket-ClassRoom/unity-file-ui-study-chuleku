@@ -1,4 +1,4 @@
-﻿Id,String
+Id,String
 HELLO,안녕
 BYE,잘가
 YOU DIE,너 죽음
@@ -30,3 +30,11 @@ Def1,10
 Def2,3
 Def3,5
 Def4,10
+Name,이름
+Desc,설명
+Type,타입
+Value,밸류
+Cost,코스트
+Weapon,무기
+Consumable,소모품
+Equip,방어구
