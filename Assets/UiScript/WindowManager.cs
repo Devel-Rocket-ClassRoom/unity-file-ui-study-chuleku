@@ -26,4 +26,20 @@ public class WindowManager : MonoBehaviour
 
         return windows[currntWindowId];
     }
+    public GenericWindow Open(int id, object data)
+    {
+        windows[currntWindowId].Close();
+        currntWindowId = id;
+        if (data != null)
+        {
+            windows[currntWindowId].Open(data);
+        }
+        else
+        {
+            windows[currntWindowId].Open();
+        }
+
+        return windows[currntWindowId];
+
+    }
 }

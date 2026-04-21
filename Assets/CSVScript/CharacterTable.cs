@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 //1.Csv 파일(ID/이르름/설명/공격력../초상화or아이콘)
 //2.DataTable 상속
@@ -10,15 +11,12 @@ public class CharacterData
     public string Id { get; set; }
     public string Name { get; set; }
     public string Desc { get; set; }
-    public string Health { get; set; }
-    public string AttackDamage { get; set; }
-    public string Defense { get; set; }
+    public int Health { get; set; }
+    public int AttackDamage { get; set; }
+    public int Defense { get; set; }
     public string Icon { get; set; }
-    public string StringName => DataTableManager.StringTable.Get("Name");
-    public string StringDesc => DataTableManager.StringTable.Get("Desc");
-    public string StringHealth => DataTableManager.StringTable.Get("Health");
-    public string StringAttack => DataTableManager.StringTable.Get("AttackDamage");
-    public string StringDefense => DataTableManager.StringTable.Get("Defense");
+    public string StringName => DataTableManager.StringTable.Get(Name);
+    public string StringDesc => DataTableManager.StringTable.Get(Desc);
     public Sprite IconSprite => Resources.Load<Sprite>($"Icon/{Icon}");
 
     public override string ToString()
@@ -28,6 +26,7 @@ public class CharacterData
 }
 public class CharacterTable : DataTable
 {
+    private List<string> keyList;
     private readonly Dictionary<string, CharacterData> table = new Dictionary<string, CharacterData>();
     public override void Load(string filename)
     {
@@ -47,6 +46,7 @@ public class CharacterTable : DataTable
                 Debug.LogError($"캐릭터 아이디 중복");
             }
         }
+        keyList = table.Keys.ToList();
     }
 
     public CharacterData Get(string id)
@@ -61,5 +61,8 @@ public class CharacterTable : DataTable
             return table[id];
         }
     }
-
+    public CharacterData GetRandom()
+    {
+        return Get(keyList[Random.Range(0, keyList.Count)]);
+    }
 }

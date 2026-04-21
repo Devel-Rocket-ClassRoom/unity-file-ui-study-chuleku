@@ -3,6 +3,7 @@ using SaveDataVC = SaveDataV4;
 using Newtonsoft.Json;
 using System.Resources;
 using System.IO;
+using Mono.Cecil.Cil;
 public static class SaveLoadManager
 {
     public enum SaveMode
@@ -21,6 +22,8 @@ public static class SaveLoadManager
         "Save2",
         "Save3"
     };
+
+
     private static string GetSaveFilePath(int slot)
     {
         return GetSaveFilePath(slot, Mode);
@@ -33,6 +36,14 @@ public static class SaveLoadManager
     public static int SaveDataVersion { get; } = 4;
     private static byte[] encrypted;
     public static SaveDataVC Data { get; set; } = new SaveDataVC();
+
+    static SaveLoadManager()
+    {
+        if(!Load())
+        {
+            Debug.LogError("세이브 파일 로드 실패!");
+        }
+    }
 
     private static JsonSerializerSettings settings = new JsonSerializerSettings
     {
@@ -95,7 +106,7 @@ public static class SaveLoadManager
     /*    string path = Path.Combine(SaveDirectory, SaveFileNames[slot]);*/
         if (!File.Exists(path))
         {
-            return false;
+            return Save();
         }
         try
         {

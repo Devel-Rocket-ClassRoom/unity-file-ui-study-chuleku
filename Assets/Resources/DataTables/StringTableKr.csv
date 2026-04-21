@@ -38,3 +38,30 @@ Cost,코스트
 Weapon,무기
 Consumable,소모품
 Equip,방어구
+Save,저장
+Load,불러오기
+CreateItem,아이템 생성
+RemoveItem,아이템 삭제
+SortTimeUp,날짜 (오름차순)
+SortTimeDown,날짜 (내림차순)
+SortNameUp,이름 (오름차순)
+SortNameDown,이름 (내림차순)
+SortCostUp,가격 (오름차순)
+SortCostDown,가격 (내림차순)
+SortAttackDamageAccending,공력력 (높은순)
+SortAttackDamageDeccending,공격력 (낮은순)
+FilterNone,없음
+FilterWeapon,무기
+FilterEquip,방어구
+FilterConsumable,소모품
+FilterNoneConsumable,비 소모품
+FilterHealthAccending,체력 150초과
+FilterHealthDeccending,체력 150이하
+FilterDefenseAccending,방어력 5초과
+FilterDefenseDeccending,방어력 5이하
+LanguageKorean,한국어
+LanguageEnglish,영어
+LanguageJapenise,일본어
+Health,체력
+AttackDamage,공격력
+Defense,방어력

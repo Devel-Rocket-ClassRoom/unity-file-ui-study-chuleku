@@ -30,7 +30,7 @@ public class UiItemInfo : MonoBehaviour
         textDesc.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("Desc"), itemData.StringDesc);
         textType.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("Type"), itemData.Type.ToString());
         textValue.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("Value"), itemData.Value.ToString());
-        textCost.text = string.Format(FormatCommon, DataTableManager.StringTable.Get(""), itemData.Cost.ToString());
+        textCost.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("Cost"), itemData.Cost.ToString());
 
     }
 

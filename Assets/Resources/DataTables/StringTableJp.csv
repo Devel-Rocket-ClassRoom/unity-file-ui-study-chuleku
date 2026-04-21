@@ -18,3 +18,21 @@ Cost,コスト
 Weapon,武器
 Equip,装備
 Consumable,消費品
+Save,Save
+Load,Load
+CreateItem,CreateItem
+RemoveItem,RemoveItem
+SortTimeUp,Time (ToUpper)
+SortTimeDown,Time (ToLower)
+SortNameUp,Name (ToUpper)
+SortNameDown,Name (ToLower)
+SortCostUp,Cost (ToUpper)
+SortCostDown,Cost (ToLower)
+FilterNone,None
+FilterWeapon,Weapon
+FilterEquip,Equip
+FilterConsumable,Consumable
+FilterNoneConsumable,NoneConsumable
+LanguageKorean,한국어(일본어)
+LanguageEnglish,영어(영어)
+LanguageJapenise,일본어(일본어)

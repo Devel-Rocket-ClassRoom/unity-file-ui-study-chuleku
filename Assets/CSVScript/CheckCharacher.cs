@@ -42,9 +42,9 @@ public class CheckCharacher : MonoBehaviour
         icon.sprite = character.IconSprite;
         localizationTextName.id = character.Name;
         localizationTextDesc.id = character.Desc;
-        localizationTextHealth.id = character.Health;
-        localizationTextAttack.id = character.AttackDamage;
-        localizationTextDefense.id = character.Defense;
+        localizationTextHealth.id = character.Health.ToString();
+        localizationTextAttack.id = character.AttackDamage.ToString();
+        localizationTextDefense.id = character.Defense.ToString();
         localizationTextName.OnChangeId();
         localizationTextDesc.OnChangeId();
         localizationTextHealth.OnChangeId();   

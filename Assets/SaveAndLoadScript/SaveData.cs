@@ -77,8 +77,11 @@ public class SaveDataV3 : SaveDataV2
 public class SaveDataV4 : SaveDataV3
 {
     public List<SaveItemData> itemids = new List<SaveItemData>();
+    public List<SaveCharaterData> charaterid = new List<SaveCharaterData>();
+    public UiCharaterList.SortingOptions charaterSortingOptions = new UiCharaterList.SortingOptions();
+    public UiInvenSlotList.SortingOptions ItemSorting = new UiInvenSlotList.SortingOptions();
+    public UiInvenSlotList.FilteringOptions ItemFiltering = new UiInvenSlotList.FilteringOptions();
 
-    
     public SaveDataV4()
     {
         Version = 4;
@@ -88,3 +91,4 @@ public class SaveDataV4 : SaveDataV3
         throw new System.NotImplementedException();
     }
 }
+

@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
@@ -24,6 +24,7 @@ public class ItemData
 
     public string StringName => DataTableManager.StringTable.Get(Name);
     public string StringDesc => DataTableManager.StringTable.Get(Desc);
+
     public Sprite IconSprite => Resources.Load<Sprite>($"Icon/{Icon}");
     public override string ToString()
     {

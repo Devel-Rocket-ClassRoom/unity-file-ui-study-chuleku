@@ -18,3 +18,21 @@ Cost,Cost
 Weapon,Weapon
 Equip,Equip
 Consumable,Consumable
+Save,Save
+Load,Load
+CreateItem,Create Item
+RemoveItem,Remove Item
+SortTimeUp,Time (ToUpper)
+SortTimeDown,Time (ToLower)
+SortNameUp,Name (ToUpper)
+SortNameDown,Name (ToLower)
+SortCostUp,Cost (ToUpper)
+SortCostDown,Cost (ToLower)
+FilterNone,None
+FilterWeapon,Weapon
+FilterEquip,Equip
+FilterConsumable,Consumable
+FilterNoneConsumable,NoneConsumable
+LanguageKorean,Korean
+LanguageEnglish,English
+LanguageJapenise,Japenise
