@@ -5,13 +5,17 @@ public class UiCharaterPanel : GenericWindow
 {
     public TMP_Dropdown sorting;
     public UiCharaterList uiCharaterSlotList;
-    public Uicharater uiItemInfo;
+    public Uicharater uiCharaterInfo;
     private SaveCharaterData currentData;
     private void OnEnable()
     {
         OnLoad();
     }
-
+    public override void Open()
+    {
+        base.Open();
+        uiCharaterInfo.SetEmpty();
+    }
     public void OnChangeSorting(int index)
     {
         uiCharaterSlotList.Sorting = (UiCharaterList.SortingOptions)index;

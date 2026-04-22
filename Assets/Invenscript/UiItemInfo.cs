@@ -10,6 +10,8 @@ public class UiItemInfo : MonoBehaviour
     public TextMeshProUGUI textType;
     public TextMeshProUGUI textValue;
     public TextMeshProUGUI textCost;
+    public ItemWindow itemWindow;
+    private SaveItemData saveItemData;
 
     public void SetEmpty()
     {
@@ -23,15 +25,18 @@ public class UiItemInfo : MonoBehaviour
 
     public void SetSaveItemData(SaveItemData data)
     {
+        saveItemData = data;
         ItemData itemData = data.itemData;
-
         imageIcon.sprite = itemData.IconSprite;
         textName.text = string.Format(FormatCommon,DataTableManager.StringTable.Get("Name"),itemData.StringName);
         textDesc.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("Desc"), itemData.StringDesc);
         textType.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("Type"), itemData.Type.ToString());
         textValue.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("Value"), itemData.Value.ToString());
         textCost.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("Cost"), itemData.Cost.ToString());
-
     }
-
+    public void OnClickEquip()
+    {
+        if(saveItemData == null) return;
+        itemWindow.Equip(saveItemData);
+    }
 }
