@@ -65,4 +65,8 @@ public class CharacterTable : DataTable
     {
         return Get(keyList[Random.Range(0, keyList.Count)]);
     }
+    public System.Collections.Generic.List<CharacterData> GetAll()
+    {
+        return table.Values.ToList();
+    }
 }

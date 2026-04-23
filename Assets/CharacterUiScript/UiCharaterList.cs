@@ -123,7 +123,22 @@ public class UiCharaterList : MonoBehaviour
     }
     public void SetSaveItemData(List<SaveCharaterData> source)
     {
-        saveCharaterDataList = source.ToList();
+        var allChars = DataTableManager.CharacterTable.GetAll();
+        saveCharaterDataList = new List<SaveCharaterData>();
+        foreach (var ch in allChars)
+        {
+            var found = source?.FirstOrDefault(s => s.CharacterData != null && s.CharacterData.Id == ch.Id);
+            if (found != null)
+            {
+                saveCharaterDataList.Add(found);
+            }
+            else
+            {
+                var sc = new SaveCharaterData();
+                sc.CharacterData = ch;
+                saveCharaterDataList.Add(sc);
+            }
+        }
         UpdateSlots();
     }
 

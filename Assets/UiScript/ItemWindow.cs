@@ -33,23 +33,31 @@ public class ItemWindow : GenericWindow
 
     public void Equip(SaveItemData data)
     {
-        weaponCheck = false;
-        equipCheck = false;
+   
+        saveItemData = data;
+        if (data == null || saveCharaterData == null)
+            return;
         if (data.itemData.Type == ItemType.Equip)
         {
+            
+            if (equipCheck)
+            {
+                saveCharaterData.equippedEquipId = data.itemData.Id;
+            }
+          
             charaterInfo.textDefense.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("Defense"), saveCharaterData.CharacterData.Defense.ToString());
             charaterInfo.textDefense.text = $"{charaterInfo.textDefense.text}(+{data.itemData.Value})";
             EquipImageSprite.sprite = data.itemData.IconSprite;
         }
-        else if(data.itemData.Type == ItemType.Weapon)
+        else if (data.itemData.Type == ItemType.Weapon)
         {
-            charaterInfo.textDamage.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("AttackDamage"),saveCharaterData.CharacterData.AttackDamage.ToString());
+            if (weaponCheck)
+            {
+                saveCharaterData.equippedWeaponId = data.itemData.Id;
+            }
+            charaterInfo.textDamage.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("AttackDamage"), saveCharaterData.CharacterData.AttackDamage.ToString());
             charaterInfo.textDamage.text = $"{charaterInfo.textDamage.text}(+{data.itemData.Value})";
             weaponImageSprite.sprite = data.itemData.IconSprite;
-        }
-        if(data.itemData.Type == ItemType.Consumable)
-        {
-            charaterInfo.textHealth.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("Health"), saveCharaterData.CharacterData.Health.ToString());
         }
     }
     public void OnClickEquip()
@@ -62,12 +70,12 @@ public class ItemWindow : GenericWindow
         if(equipCheck)
         {
             equipCheck = false;
-            EquipImageSprite.sprite = null;
+            EquipImageSprite = null;
         }
         if (weaponCheck)
         {
             weaponCheck = false;
-            weaponImageSprite.sprite = null;
+            weaponImageSprite = null;
         }
     }
     public void OnClickWeapon()
@@ -79,6 +87,12 @@ public class ItemWindow : GenericWindow
     {
         weaponCheck = false;
         equipCheck = false;
+
+        if (saveCharaterData != null)
+        {
+            SaveLoadManager.Data.charaterid = new System.Collections.Generic.List<SaveCharaterData> { saveCharaterData };
+            SaveLoadManager.Save();
+        }
         windowManager.Open(0);
     }
     public void OnSave()

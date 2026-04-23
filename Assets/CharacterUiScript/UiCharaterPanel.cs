@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using System.Linq;
 
 public class UiCharaterPanel : GenericWindow
 {
@@ -30,7 +31,7 @@ public class UiCharaterPanel : GenericWindow
     }
     public void OnSave()
     {
-        SaveLoadManager.Data.charaterid = uiCharaterSlotList.GetSaveCharaterDataList();
+        SaveLoadManager.Data.charaterid = uiCharaterSlotList.GetSaveCharaterDataList().Where(x => x.IsModified).ToList();
         SaveLoadManager.Data.charaterSortingOptions = (UiCharaterList.SortingOptions)sorting.value;
         SaveLoadManager.Save();
     }
