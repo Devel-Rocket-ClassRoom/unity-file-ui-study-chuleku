@@ -121,27 +121,11 @@ public class UiCharaterList : MonoBehaviour
     {
         return saveCharaterDataList;
     }
-    public void SetSaveItemData(List<SaveCharaterData> source)
+    public void SetSaveCharaterData(List<SaveCharaterData> source)
     {
-        var allChars = DataTableManager.CharacterTable.GetAll();
-        saveCharaterDataList = new List<SaveCharaterData>();
-        foreach (var ch in allChars)
-        {
-            var found = source?.FirstOrDefault(s => s.CharacterData != null && s.CharacterData.Id == ch.Id);
-            if (found != null)
-            {
-                saveCharaterDataList.Add(found);
-            }
-            else
-            {
-                var sc = new SaveCharaterData();
-                sc.CharacterData = ch;
-                saveCharaterDataList.Add(sc);
-            }
-        }
+        saveCharaterDataList = source.ToList();
         UpdateSlots();
     }
-
     private void UpdateSlots()
     {
         var list = saveCharaterDataList.Where(filterings[(int)filtering]).ToList();
@@ -185,6 +169,11 @@ public class UiCharaterList : MonoBehaviour
         saveCharaterDataList.Add(SaveCharaterData.GetRandomCharater());
         UpdateSlots();
     }
+    public void Add(SaveCharaterData saveCharaterData)
+    {
+        saveCharaterDataList.Add(saveCharaterData);
+        UpdateSlots();
+    }
     public void RemoveItem()
     {
         if (selectedSlotIndex == -1)
@@ -195,5 +184,6 @@ public class UiCharaterList : MonoBehaviour
         saveCharaterDataList.Remove(uiSlotList[selectedSlotIndex].saveCharaterData);
         UpdateSlots();
     }
+
 }
 

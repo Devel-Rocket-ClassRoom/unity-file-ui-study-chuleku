@@ -11,7 +11,7 @@ public static class SaveLoadManager
         Text,   // Json 텍스트일때는(개발용) .json 으로
         Encrypted  // aes 암호화 (배포용) .dat으로
     }
-    public static SaveMode Mode { get; set; } = SaveMode.Encrypted;
+    public static SaveMode Mode { get; set; } = SaveMode.Text;
 
     private static readonly string SaveDirectory = $"{Application.persistentDataPath}/save";
 
@@ -70,14 +70,17 @@ public static class SaveLoadManager
             
             var json = JsonConvert.SerializeObject(Data, settings);
             string path = GetSaveFilePath(slot,mode);
-            
+     
                switch(Mode)
             {
                 case SaveMode.Text:
                     File.WriteAllText(path, json);
+                    Debug.Log("저장됨");
+
                     break;
                 case SaveMode.Encrypted:
-                    File.WriteAllBytes(path, CryptoUtil.Encrypt(json)); 
+                    File.WriteAllBytes(path, CryptoUtil.Encrypt(json));
+                    Debug.Log("저장됨");
                     break;
             }
             return true;

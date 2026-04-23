@@ -14,49 +14,61 @@ public class ItemWindow : GenericWindow
     private SaveItemData saveItemData;
     private bool equipCheck;
     private bool weaponCheck;
-
+    private CharacterData characterData;
     public UnityEvent onUpdateSlots;
+    private EquipCharater equipCharater;
 
     public override void Open(SaveCharaterData data)
     {
         base.Open();
         saveCharaterData = data;
+        characterData = data.CharacterData;
         charaterInfo.SetSaveItemData(data);
+        equipCharater = new EquipCharater(characterData);
         itemInfo.SetEmpty();
+        if(data.equippedEquipId != null)
+        {
+            EquipImageSprite.sprite = DataTableManager.ItemTable.Get(data.equippedEquipId).IconSprite;
+        }
+        else
+        {
+            EquipImageSprite.sprite = null;
+        }
+        if (data.equippedWeaponId != null)
+        {
+            weaponImageSprite.sprite = DataTableManager.ItemTable.Get(data.equippedWeaponId).IconSprite;
+        }
+        else
+        {
+            weaponImageSprite.sprite = null;
+        }
         weaponCheck = false;
         equipCheck = false;
     }
     public override void Close()
     {
         base.Close();
+       
     }
 
     public void Equip(SaveItemData data)
     {
-   
         saveItemData = data;
+        
         if (data == null || saveCharaterData == null)
             return;
         if (data.itemData.Type == ItemType.Equip)
         {
-            
-            if (equipCheck)
-            {
-                saveCharaterData.equippedEquipId = data.itemData.Id;
-            }
-          
-            charaterInfo.textDefense.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("Defense"), saveCharaterData.CharacterData.Defense.ToString());
-            charaterInfo.textDefense.text = $"{charaterInfo.textDefense.text}(+{data.itemData.Value})";
+            equipCharater.newDefense = data.itemData.Value;
+            saveCharaterData.equippedEquipId = data.itemData.Id;
+            charaterInfo.textDefense.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("Defense"),equipCharater.DefenseInfo());
             EquipImageSprite.sprite = data.itemData.IconSprite;
         }
         else if (data.itemData.Type == ItemType.Weapon)
         {
-            if (weaponCheck)
-            {
-                saveCharaterData.equippedWeaponId = data.itemData.Id;
-            }
-            charaterInfo.textDamage.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("AttackDamage"), saveCharaterData.CharacterData.AttackDamage.ToString());
-            charaterInfo.textDamage.text = $"{charaterInfo.textDamage.text}(+{data.itemData.Value})";
+            equipCharater.newAttack = data.itemData.Value;
+            saveCharaterData.equippedWeaponId = data.itemData.Id;
+            charaterInfo.textDamage.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("AttackDamage"),equipCharater.AttackInfo());
             weaponImageSprite.sprite = data.itemData.IconSprite;
         }
     }
@@ -70,12 +82,18 @@ public class ItemWindow : GenericWindow
         if(equipCheck)
         {
             equipCheck = false;
-            EquipImageSprite = null;
+            saveCharaterData.equippedEquipId = null;
+            equipCharater.newDefense = 0;
+            EquipImageSprite.sprite = null;
+            charaterInfo.textDefense.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("Defense"), equipCharater.AttackInfo());
         }
         if (weaponCheck)
         {
             weaponCheck = false;
-            weaponImageSprite = null;
+            saveCharaterData.equippedWeaponId=null;
+            equipCharater.newAttack =0;
+            charaterInfo.textDamage.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("AttackDamage"), equipCharater.DefenseInfo());
+            weaponImageSprite.sprite = null;
         }
     }
     public void OnClickWeapon()
@@ -87,13 +105,9 @@ public class ItemWindow : GenericWindow
     {
         weaponCheck = false;
         equipCheck = false;
-
-        if (saveCharaterData != null)
-        {
-            SaveLoadManager.Data.charaterid = new System.Collections.Generic.List<SaveCharaterData> { saveCharaterData };
-            SaveLoadManager.Save();
-        }
-        windowManager.Open(0);
+        saveCharaterData.CharacterData.AttackDamage = equipCharater.AttackInfo();
+        saveCharaterData.CharacterData.Defense = equipCharater.DefenseInfo();
+        windowManager.Open(0,saveCharaterData);
     }
     public void OnSave()
     {

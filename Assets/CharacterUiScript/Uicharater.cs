@@ -28,13 +28,14 @@ public class Uicharater : MonoBehaviour
     public void SetSaveItemData(SaveCharaterData data)
     {
         currentData = data;
-        CharacterData charater = data.CharacterData;
+        CharacterData charater =  data.CharacterData;
+        EquipCharater equipCharater = new EquipCharater(charater);
         imageIcon.sprite = charater.IconSprite;
         textName.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("Name"), charater.StringName);
         textDesc.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("Desc"), charater.StringDesc);
         textHealth.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("Health"), charater.Health.ToString());
-        textDamage.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("AttackDamage"), charater.AttackDamage.ToString());
-        textDefense.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("Defense"), charater.Defense.ToString());
+        textDamage.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("AttackDamage"), equipCharater.AttackInfo());
+        textDefense.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("Defense"), equipCharater.DefenseInfo());
     }
     public void OnClickItem()
     {

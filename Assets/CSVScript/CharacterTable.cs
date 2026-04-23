@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -15,10 +16,37 @@ public class CharacterData
     public int AttackDamage { get; set; }
     public int Defense { get; set; }
     public string Icon { get; set; }
+    [JsonIgnore]
     public string StringName => DataTableManager.StringTable.Get(Name);
+    [JsonIgnore]
     public string StringDesc => DataTableManager.StringTable.Get(Desc);
+    [JsonIgnore]
     public Sprite IconSprite => Resources.Load<Sprite>($"Icon/{Icon}");
-
+    [JsonIgnore]
+    public int InFoAttackDamage;
+    [JsonIgnore]
+    public int InFoDefense;
+    public int NewAttackDamege(int value)
+    {
+        InFoAttackDamage = AttackDamage + value;
+        return InFoAttackDamage;
+    }
+    public int NewAttackDamege()
+    {
+        InFoAttackDamage = AttackDamage;
+        return InFoAttackDamage;
+    }
+    public int NewDefense(int value)
+    {
+        InFoDefense = Defense + value;
+        return InFoDefense;
+    }
+    public int NewDefense()
+    {
+        InFoDefense = Defense;
+        return InFoDefense;
+    }
+ 
     public override string ToString()
     {
         return $"{Id} / {Name} / {Desc} / {Health} / {AttackDamage} / {Defense} / {Icon}";
@@ -69,4 +97,16 @@ public class CharacterTable : DataTable
     {
         return table.Values.ToList();
     }
+}
+public class EquipCharater
+{
+    public CharacterData baseData { get; private set; }
+    public int newAttack { get; set; }
+    public int newDefense { get; set; }
+    public EquipCharater(CharacterData data)
+    {
+        baseData = data;
+    }
+    public int AttackInfo() => baseData.AttackDamage + newAttack;
+    public int DefenseInfo() => baseData.Defense + newDefense;
 }

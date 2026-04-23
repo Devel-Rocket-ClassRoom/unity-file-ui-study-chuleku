@@ -5,10 +5,8 @@ using UnityEngine;
 public class SaveCharaterData
 {
     public Guid instanceId { get; set; }
-    [JsonConverter(typeof(CharaterDataConverter))]
     public CharacterData CharacterData { get; set; }
     public DateTime creationTime { get; set; }
-    // 장착된 장비 id (아이템 테이블의 Id)
     public string equippedWeaponId { get; set; }
     public string equippedEquipId { get; set; }
 
@@ -22,10 +20,18 @@ public class SaveCharaterData
     {
         instanceId = Guid.NewGuid();
         creationTime = DateTime.Now;
+        equippedWeaponId = null;
+        equippedEquipId = null;
     }
 
-    [JsonIgnore]
-    public bool IsModified => !string.IsNullOrEmpty(equippedWeaponId) || !string.IsNullOrEmpty(equippedEquipId);
+    public SaveCharaterData(string equippedWeaponId = null, string equippedEquipId = null)
+    {
+        instanceId = Guid.NewGuid();
+        creationTime = DateTime.Now;
+        this.equippedWeaponId = equippedWeaponId;
+        this.equippedEquipId = equippedEquipId;
+    }
+
     public override string ToString()
     {
         return $"{instanceId}\n{creationTime}\n{CharacterData.Id}";

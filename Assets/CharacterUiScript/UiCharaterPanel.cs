@@ -5,6 +5,7 @@ using System.Linq;
 public class UiCharaterPanel : GenericWindow
 {
     public TMP_Dropdown sorting;
+    public TMP_Dropdown filtering;
     public UiCharaterList uiCharaterSlotList;
     public Uicharater uiCharaterInfo;
     private SaveCharaterData currentData;
@@ -15,7 +16,23 @@ public class UiCharaterPanel : GenericWindow
     public override void Open()
     {
         base.Open();
+        currentData = null;
         uiCharaterInfo.SetEmpty();
+        OnLoad();
+    }
+    public override void Open(SaveCharaterData data)
+    {
+        base.Open();
+        uiCharaterSlotList.Add(data);
+        OnSave();
+        currentData = null;
+        uiCharaterInfo.SetEmpty();
+        OnLoad();
+    }
+    public override void Close()
+    {
+        base.Close();
+       
     }
     public void OnChangeSorting(int index)
     {
@@ -31,16 +48,17 @@ public class UiCharaterPanel : GenericWindow
     }
     public void OnSave()
     {
-        SaveLoadManager.Data.charaterid = uiCharaterSlotList.GetSaveCharaterDataList().Where(x => x.IsModified).ToList();
+        SaveLoadManager.Data.charaterid = uiCharaterSlotList.GetSaveCharaterDataList().ToList();
         SaveLoadManager.Data.charaterSortingOptions = (UiCharaterList.SortingOptions)sorting.value;
+        SaveLoadManager.Data.charaterFilteringOptions = (UiCharaterList.FilteringOptions)filtering.value;
         SaveLoadManager.Save();
     }
     public void OnLoad()
     {
-        SaveLoadManager.Load();
-
         OnChangeSorting((int)SaveLoadManager.Data.charaterSortingOptions);
-        uiCharaterSlotList.SetSaveItemData(SaveLoadManager.Data.charaterid);
+        OnChangeFiltering((int)SaveLoadManager.Data.charaterFilteringOptions);
+        uiCharaterSlotList.SetSaveCharaterData(SaveLoadManager.Data.charaterid);
+        SaveLoadManager.Load();
     }
     public void OnCreateItem()
     {
@@ -57,6 +75,7 @@ public class UiCharaterPanel : GenericWindow
         {
             return;
         }
+        OnSave();
         windowManager.Open(1, currentData);
     }
 }
