@@ -23,11 +23,12 @@ public class UiCharaterPanel : GenericWindow
     public override void Open(SaveCharaterData data)
     {
         base.Open();
-        uiCharaterSlotList.Add(data);
-        OnSave();
         currentData = null;
         uiCharaterInfo.SetEmpty();
+        uiCharaterSlotList.Add(data);
+        OnSave();
         OnLoad();
+        
     }
     public override void Close()
     {
@@ -72,6 +73,10 @@ public class UiCharaterPanel : GenericWindow
     {
         currentData = data;
         if (currentData == null)
+        {
+            return;
+        }
+        if(uiCharaterInfo.imageIcon == null)
         {
             return;
         }

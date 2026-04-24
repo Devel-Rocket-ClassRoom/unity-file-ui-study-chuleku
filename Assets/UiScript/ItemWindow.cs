@@ -26,7 +26,7 @@ public class ItemWindow : GenericWindow
         charaterInfo.SetSaveItemData(data);
         equipCharater = new EquipCharater(characterData);
         itemInfo.SetEmpty();
-        if(data.equippedEquipId != null)
+        if(!string.IsNullOrEmpty(data.equippedEquipId)&& DataTableManager.ItemTable.Get(data.equippedEquipId).IconSprite)
         {
             EquipImageSprite.sprite = DataTableManager.ItemTable.Get(data.equippedEquipId).IconSprite;
         }
@@ -34,8 +34,9 @@ public class ItemWindow : GenericWindow
         {
             EquipImageSprite.sprite = null;
         }
-        if (data.equippedWeaponId != null)
+        if (!string.IsNullOrEmpty(data.equippedWeaponId)&&DataTableManager.ItemTable.Get(data.equippedWeaponId).IconSprite)
         {
+            /*data.equippedWeaponId != string.Empty*/
             weaponImageSprite.sprite = DataTableManager.ItemTable.Get(data.equippedWeaponId).IconSprite;
         }
         else
@@ -82,17 +83,17 @@ public class ItemWindow : GenericWindow
         if(equipCheck)
         {
             equipCheck = false;
-            saveCharaterData.equippedEquipId = null;
+            saveCharaterData.equippedEquipId = string.Empty;
             equipCharater.newDefense = 0;
             EquipImageSprite.sprite = null;
-            charaterInfo.textDefense.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("Defense"), equipCharater.AttackInfo());
+            charaterInfo.textDefense.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("Defense"), equipCharater.DefenseInfo());
         }
         if (weaponCheck)
         {
             weaponCheck = false;
-            saveCharaterData.equippedWeaponId=null;
+            saveCharaterData.equippedWeaponId= string.Empty;
             equipCharater.newAttack =0;
-            charaterInfo.textDamage.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("AttackDamage"), equipCharater.DefenseInfo());
+            charaterInfo.textDamage.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("AttackDamage"), equipCharater.AttackInfo());
             weaponImageSprite.sprite = null;
         }
     }
