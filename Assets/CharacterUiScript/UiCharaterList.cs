@@ -171,6 +171,8 @@ public class UiCharaterList : MonoBehaviour
     }
     public void Add(SaveCharaterData saveCharaterData)
     {
+        saveCharaterData.equipWeapondamage = saveCharaterData.CharacterData.AttackDamage;
+        saveCharaterData.equipDefense = saveCharaterData.CharacterData.Defense;
         saveCharaterDataList.Add(saveCharaterData);
         UpdateSlots();
     }
