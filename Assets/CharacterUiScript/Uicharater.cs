@@ -35,8 +35,22 @@ public class Uicharater : MonoBehaviour
         textName.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("Name"), charater.StringName);
         textDesc.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("Desc"), charater.StringDesc);
         textHealth.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("Health"), charater.Health.ToString());
-        textDamage.text = string.Format(FormatEquipCommon, DataTableManager.StringTable.Get("AttackDamage"),charater.AttackDamage.ToString(),charater.InFoAttackDamage.ToString());
-        textDefense.text = string.Format(FormatEquipCommon, DataTableManager.StringTable.Get("Defense"), charater.Defense.ToString(),charater.InFoDefense.ToString());
+        if(data.equipWeapondamage == 0)
+        {
+            textDamage.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("AttackDamage"), charater.AttackDamage.ToString());
+        }
+        else
+        {
+            textDamage.text = string.Format(FormatEquipCommon, DataTableManager.StringTable.Get("AttackDamage"), charater.AttackDamage.ToString(), data.equipWeapondamage.ToString());
+        }
+        if(data.equipDefense == 0)
+        {
+            textDefense.text = string.Format(FormatCommon, DataTableManager.StringTable.Get("Defense"), charater.Defense.ToString());
+        }
+        else
+        {
+            textDefense.text = string.Format(FormatEquipCommon, DataTableManager.StringTable.Get("Defense"), charater.Defense.ToString(), data.equipDefense.ToString());
+        }
     }
     public void OnClickItem()
     {

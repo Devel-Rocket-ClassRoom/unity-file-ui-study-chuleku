@@ -23,30 +23,9 @@ public class CharacterData
     [JsonIgnore]
     public Sprite IconSprite => Resources.Load<Sprite>($"Icon/{Icon}");
     [JsonIgnore]
-    public int InFoAttackDamage;
+    public int InFoAttackDamage = 0;
     [JsonIgnore]
-    public int InFoDefense;
-    public int NewAttackDamege(int value)
-    {
-        InFoAttackDamage = AttackDamage + value;
-        return InFoAttackDamage;
-    }
-    public int NewAttackDamege()
-    {
-        InFoAttackDamage = AttackDamage;
-        return InFoAttackDamage;
-    }
-    public int NewDefense(int value)
-    {
-        InFoDefense = Defense + value;
-        return InFoDefense;
-    }
-    public int NewDefense()
-    {
-        InFoDefense = Defense;
-        return InFoDefense;
-    }
- 
+    public int InFoDefense = 0;
     public override string ToString()
     {
         return $"{Id} / {Name} / {Desc} / {Health} / {AttackDamage} / {Defense} / {Icon}";

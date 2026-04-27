@@ -23,7 +23,8 @@ public class SaveCharaterData
         creationTime = DateTime.Now;
         equippedWeaponId = null;
         equippedEquipId = null;
-   
+        equipDefense = 0;
+        equipWeapondamage = 0;
     }
     public SaveCharaterData(CharacterData characterData)
     {
@@ -31,8 +32,8 @@ public class SaveCharaterData
         creationTime = DateTime.Now;
         equippedWeaponId = null;
         equippedEquipId = null;
-        equipDefense = characterData.Defense;
-        equipWeapondamage = characterData.AttackDamage;
+        equipDefense = characterData.InFoDefense;
+        equipWeapondamage = characterData.InFoAttackDamage;
     }
     public override string ToString()
     {

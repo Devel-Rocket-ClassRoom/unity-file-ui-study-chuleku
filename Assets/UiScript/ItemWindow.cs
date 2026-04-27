@@ -56,14 +56,14 @@ public class ItemWindow : GenericWindow
             return;
         if (data.itemData.Type == ItemType.Equip)
         {
-            saveCharaterData.CharacterData.InFoDefense = data.itemData.Value;
+            saveCharaterData.equipDefense= data.itemData.Value;
             saveCharaterData.equippedEquipId = data.itemData.Id;
             EquipImageSprite.sprite = data.itemData.IconSprite;
             charaterInfo.SetSaveItemData(saveCharaterData);
         }
         else if (data.itemData.Type == ItemType.Weapon)
         {
-            saveCharaterData.CharacterData.InFoAttackDamage = data.itemData.Value;
+            saveCharaterData.equipWeapondamage = data.itemData.Value;
             saveCharaterData.equippedWeaponId = data.itemData.Id;
             weaponImageSprite.sprite = data.itemData.IconSprite;
             charaterInfo.SetSaveItemData(saveCharaterData);
@@ -80,7 +80,7 @@ public class ItemWindow : GenericWindow
         {
             equipCheck = false;
             saveCharaterData.equippedEquipId = string.Empty;
-            saveCharaterData.CharacterData.InFoDefense = 0;
+            saveCharaterData.equipDefense = 0;
             EquipImageSprite.sprite = null;
             charaterInfo.SetSaveItemData(saveCharaterData);
         }
@@ -88,7 +88,7 @@ public class ItemWindow : GenericWindow
         {
             weaponCheck = false;
             saveCharaterData.equippedWeaponId= string.Empty;
-            saveCharaterData.CharacterData.InFoAttackDamage = 0;
+            saveCharaterData.equipWeapondamage = 0;
             weaponImageSprite.sprite = null;
             charaterInfo.SetSaveItemData(saveCharaterData);
         }
